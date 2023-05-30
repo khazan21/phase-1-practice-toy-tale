@@ -50,6 +50,7 @@ function addToyInfo(toy) {
 
   //create a paragraph with how many likes
   let likesCount = document.createElement('p');
+  likesCount.id = 'likes-count'
   likesCount.textContent = toy.likes + ' likes';
   card.append(likesCount);
 
@@ -59,6 +60,17 @@ function addToyInfo(toy) {
   likeBtn.id = '[toy_id]';
   likeBtn.textContent = "Like";
   card.append(likeBtn);
+  likeMonitor();
+
+  let i = toy.likes;
+
+  function likeMonitor() {
+    likeBtn.addEventListener('click', () => {
+      let likes = document.getElementById('likes-count').value 
+      likes = ++i;
+      likesCount.textContent = likes + ' likes';
+    })
+  }
 }
 
 const newToy = {
@@ -83,4 +95,5 @@ async function addNewToy(url = 'http://localhost:3000/toys', data = newToy) {
 
 }
 
-addNewToy();
+// addNewToy();
+
