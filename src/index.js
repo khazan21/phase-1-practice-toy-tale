@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch('http://localhost:3000/toys')
     .then(r => r.json())
     .then(toyData => {
-      // addToyInfo(toyData[0])
       toyData.forEach(whatever => {
         addToyInfo(whatever)
       });
