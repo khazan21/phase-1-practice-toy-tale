@@ -21,14 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
         addToyInfo(whatever)
       });
     })
-
-  const newToy = {
-    "name": "Jessie",
-    "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-    "likes": 0
-  };
-
-
 });
 
 function addToyInfo(toy) {
@@ -66,23 +58,17 @@ function addToyInfo(toy) {
 
   function likeMonitor() {
     likeBtn.addEventListener('click', () => {
-      let likes = document.getElementById('likes-count').value 
+      let likes = document.getElementById('likes-count').value
       likes = ++i;
       likesCount.textContent = likes + ' likes';
     })
   }
 }
 
-const newToy = {
-  "name": "Jessie",
-  "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-  "likes": 0
-};
+// console.log(newToy);
 
-console.log(newToy);
-
-async function addNewToy(url = 'http://localhost:3000/toys', data = newToy) {
-  const response = await fetch(url, {
+async function addNewToy(data) {
+  const response = await fetch(url = 'http://localhost:3000/toys', {
     method: 'POST',
     headers: {
       "Content-Type": "application/json",
@@ -92,8 +78,23 @@ async function addNewToy(url = 'http://localhost:3000/toys', data = newToy) {
     body: JSON.stringify(data)
   });
   return console.log(response.json());
-
 }
 
-// addNewToy();
 
+// console.log(e.target.name);
+const form = document.querySelector("form.add-toy-form")
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  let name = e.target.name.value
+  let image = e.target.image.value
+  const newToy = {
+    "name": name,
+    "image": image,
+    "likes": 0
+  }
+  addNewToy(newToy);
+  addToyInfo(newToy);
+});
+
+
+// "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
