@@ -15,11 +15,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetch('http://localhost:3000/toys')
     .then(r => r.json())
-    .then(toyData => addToyInfo(toyData[0]))
-
-    //addToyInfo(toyData[0]);
+    .then(toyData => {
+      // addToyInfo(toyData[0])
+      toyData.forEach(whatever => {
+        addToyInfo(whatever)
+      });
+    })
 });
 
 function addToyInfo(toy) {
-  console.log(toy.name);
+  let toyCollection = document.getElementById("toy-collection")
+  let toyName = document.createElement('h2')
+  toyName.textContent = toy.name
+  toyCollection.append(toyName)
+
+  let toyImg = document.createElement('img')
+  toyImg.src = toy.image
+  toyCollection.append(toyImg)
 }
