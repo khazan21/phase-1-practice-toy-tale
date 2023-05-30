@@ -12,4 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
       toyFormContainer.style.display = "none";
     }
   });
+
+  fetch('http://localhost:3000/toys')
+    .then(r => r.json())
+    .then(toyData => addToyInfo(toyData[0]))
+
+    //addToyInfo(toyData[0]);
 });
+
+function addToyInfo(toy) {
+  console.log(toy.name);
+}
