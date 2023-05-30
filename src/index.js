@@ -21,15 +21,66 @@ document.addEventListener("DOMContentLoaded", () => {
         addToyInfo(whatever)
       });
     })
+
+  const newToy = {
+    "name": "Jessie",
+    "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+    "likes": 0
+  };
+
+
 });
 
 function addToyInfo(toy) {
   let toyCollection = document.getElementById("toy-collection")
+
+  let card = document.createElement('div');
+  //card.classList.add("card");
+  card.className = 'card';
+  toyCollection.append(card);
+
   let toyName = document.createElement('h2')
   toyName.textContent = toy.name
-  toyCollection.append(toyName)
+  card.append(toyName);
 
   let toyImg = document.createElement('img')
-  toyImg.src = toy.image
-  toyCollection.append(toyImg)
+  toyImg.src = toy.image;
+  toyImg.classList.add('toy-avatar');
+  card.append(toyImg);
+
+  //create a paragraph with how many likes
+  let likesCount = document.createElement('p');
+  likesCount.textContent = toy.likes + ' likes';
+  card.append(likesCount);
+
+  //create a button for the likes
+  let likeBtn = document.createElement('button');
+  likeBtn.classList.add('like-btn');
+  likeBtn.id = '[toy_id]';
+  likeBtn.textContent = "Like";
+  card.append(likeBtn);
 }
+
+const newToy = {
+  "name": "Jessie",
+  "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+  "likes": 0
+};
+
+console.log(newToy);
+
+async function addNewToy(url = 'http://localhost:3000/toys', data = newToy) {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+
+    body: JSON.stringify(data)
+  });
+  return console.log(response.json());
+
+}
+
+addNewToy();
